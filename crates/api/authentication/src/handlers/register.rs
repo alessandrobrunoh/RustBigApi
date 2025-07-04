@@ -11,6 +11,7 @@ use common::models::user::User;
 use common::repositories::users_repo;
 use validator::Validate;
 use common::config::app_config::AppConfig;
+use actix_web::cookie::{Cookie, SameSite};
 
 #[utoipa::path(
     post,
@@ -83,7 +84,7 @@ pub async fn register_handler(
         iat: now.timestamp() as usize,
         iss: app_config.jwt_issuer.clone(),
         aud: app_config.jwt_audience.clone(),
-        roles,
+        roles: Vec::new(),
     };
     let secret = std::env::var("JWT_SECRET").expect("JWT_SECRET env variable not set");
     let token = match jsonwebtoken::encode(
@@ -94,6 +95,16 @@ pub async fn register_handler(
         Ok(token) => token,
         Err(_) => return Err(ServiceError::InternalServerError),
     };
-    // Step 7: Response with JWT
-    Ok(HttpResponse::Ok().body(token))
+
+    // Step 7: Response with JWT in cookie
+    let cookie = Cookie::build("auth_token", token.clone())
+        .path("/")
+        .http_only(true)
+        .same_site(SameSite::Lax)
+        .secure(true)
+        .finish();
+
+    Ok(HttpResponse::Ok()
+        .cookie(cookie)
+        .body(token))
 }

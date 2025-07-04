@@ -59,7 +59,12 @@ async fn main() -> Result<(), std::io::Error> {
             .app_data(web::Data::new(pool.clone()))
             .app_data(web::Data::new(app_config.clone()))
             .wrap(Logger::default())
-            .wrap(Cors::default().allowed_header(CONTENT_TYPE))
+            .wrap(Cors::default()
+                .allow_any_header()
+                .allow_any_method()
+                .allow_any_origin()
+                .supports_credentials()
+            )
             .configure(route_config)
             .service(
                 SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-doc/openapi.json", ApiDoc::openapi()),

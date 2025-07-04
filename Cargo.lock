@@ -1549,38 +1549,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "private_api"
-version = "0.1.0"
-dependencies = [
- "actix-cors",
- "actix-web",
- "anyhow",
- "argon2",
- "chrono",
- "common",
- "config",
- "dhat",
- "diesel",
- "dotenvy",
- "jsonwebtoken",
- "lazy_static",
- "once_cell",
- "r2d2",
- "rand 0.8.5",
- "regex",
- "serde",
- "serde_json",
- "thiserror",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "utoipa",
- "utoipa-swagger-ui",
- "uuid",
- "validator",
-]
-
-[[package]]
 name = "proc-macro-error-attr2"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

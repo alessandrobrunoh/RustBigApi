@@ -13,7 +13,7 @@ pub struct AppConfig {
 impl AppConfig {
     pub fn from_files(crate_config: &str) -> Result<Self, config::ConfigError> {
         config::Config::builder()
-            .add_source(config::File::with_name("../../config.toml").required(true)) // workspace config
+            .add_source(config::File::with_name("../../../config.toml").required(true)) // workspace config
             .add_source(config::File::with_name(crate_config).required(true)) // crate config
             .build()?
             .try_deserialize()

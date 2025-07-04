@@ -50,7 +50,7 @@ rand = { workspace = true }
 uuid = { workspace = true }
 
 # * Common
-common = { path = "../common" }
+common = { path = "../../common" }
 
 [dev-dependencies]
 dhat = { workspace = true}
