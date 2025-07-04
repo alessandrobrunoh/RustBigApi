@@ -2,6 +2,7 @@
 members = [
     "crates/api/authentication",
     "crates/api/private",
+    "crates/website",
     "crates/common"
 ]
 
