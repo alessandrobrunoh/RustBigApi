@@ -3,7 +3,6 @@ name = "authentication"
 version = "0.1.0"
 edition = "2021"
 
-
 [dependencies]
 # Utils
 dotenvy = { workspace = true }
@@ -50,7 +49,7 @@ rand = { workspace = true }
 uuid = { workspace = true }
 
 # * Common
-common = { path = "../common" }
+common = { path = "../../common" }
 
 [dev-dependencies]
 dhat = { workspace = true}
