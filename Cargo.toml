@@ -1,7 +1,7 @@
 [workspace]
 members = [
-    "crates/private_api",
-    "crates/authentication",
+    "crates/api/authentication",
+    "crates/api/private",
     "crates/common"
 ]
 
