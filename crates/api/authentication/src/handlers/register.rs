@@ -1,5 +1,5 @@
 use crate::models::claims::Claims;
-use crate::models::user::RegisterUser;
+use crate::models::register::RegisterUser;
 use crate::DbPool;
 use actix_web::{post, web, HttpResponse};
 use argon2::password_hash::rand_core::OsRng;

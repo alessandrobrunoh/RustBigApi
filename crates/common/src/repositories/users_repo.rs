@@ -1,3 +1,4 @@
+use actix_web::web::Data;
 use crate::errors::ServiceError;
 pub use crate::models::user::{NewUser, User};
 use crate::repositories::{establish_connection, PgPool};
@@ -60,5 +61,12 @@ pub fn find_user_by_username_or_email(pool: &PgPool, username_or_email: &str) ->
     let mut conn = establish_connection(pool)?;
     users
         .filter(username.eq(username_or_email).or(email.eq(username_or_email)))
+        .first::<User>(&mut conn)
+}
+
+pub fn get_user_by_username(pool: &PgPool, other_username: &str) -> Result<User, diesel::result::Error> {
+    let mut conn = establish_connection(pool)?;
+    users
+        .filter(username.eq(other_username))
         .first::<User>(&mut conn)
 }

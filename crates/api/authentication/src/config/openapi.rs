@@ -4,10 +4,12 @@ use utoipa::OpenApi;
 #[openapi(
     paths(
         crate::handlers::register::register_handler,
+        crate::handlers::login::login_handler,
     ),
     components(
         schemas(
-            crate::models::user::RegisterUser,
+            crate::models::register::RegisterUser,
+            crate::models::login::LoginUser,
             common::models::user::User,
         )
     ),

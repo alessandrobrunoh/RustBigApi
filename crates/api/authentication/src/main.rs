@@ -32,7 +32,13 @@ async fn main() -> Result<(), std::io::Error> {
 
     dotenvy::dotenv().ok();
     let app_config = AppConfig::from_files("./config.toml").expect("Failed to load AppConfig");
-    env::set_var("RUST_LOG", app_config.rust_log.clone().unwrap_or_else(|| "debug".to_string()));
+
+    // Safely set the environment variable without using unsafe
+    if let Some(rust_log) = app_config.rust_log.clone() {
+        std::env::set_var("RUST_LOG", rust_log);
+    } else {
+        std::env::set_var("RUST_LOG", "debug");
+    }
     tracing_subscriber::fmt::init();
 
     info!("Starting server...");

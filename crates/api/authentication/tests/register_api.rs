@@ -1,6 +1,6 @@
 use actix_web::{post, test, web, App, HttpResponse, Responder};
 use actix_web::web::Json;
-use authentication::RegisterUser;
+use authentication::models::register::RegisterUser;
 
 // 1. Define the trait
 pub trait UserRepository: Send + Sync {

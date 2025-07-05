@@ -10,3 +10,10 @@ pub struct Claims {
     pub roles: Vec<String>, // User roles
 }
 
+impl Claims {
+    pub fn generate_jwt(&self, secret: &str) -> Result<String, jsonwebtoken::errors::Error> {
+        let header = jsonwebtoken::Header::default();
+        let encoding_key = jsonwebtoken::EncodingKey::from_secret(secret.as_ref());
+        jsonwebtoken::encode(&header, self, &encoding_key)
+    }
+}

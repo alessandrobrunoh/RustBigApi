@@ -1,8 +1,14 @@
 [workspace]
 members = [
     "crates/api/authentication",
+    "crates/api/private",
     "crates/common"
 ]
+
+[package]
+name = "rust_big_api"
+version = "0.1.0"
+edition = "2021"
 
 [workspace.dependencies]
 dotenvy = "0.15.7"
@@ -30,3 +36,7 @@ argon2 = "0.5"
 rand = "0.8"
 uuid = { version = "1.17.0", features = ["v4", "serde"] }
 dhat = "0.3"
+
+[lib]
+path = "src/lib.rs"
+name = "rust_big_api"

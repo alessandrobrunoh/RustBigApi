@@ -10,18 +10,14 @@ use common::models::user::NewUser;
 
 #[derive(Validate, Serialize, Deserialize, ToSchema)]
 #[schema(
-    title = "Register User",
-    description = "Register a user in the system",
+    title = "Login User",
+    description = "Login a user in the system",
     example = json!({"username": "johndoe", "email": "john_doe@gmail.com", "password": "Secret123!"})
 )]
-pub struct RegisterUser {
+pub struct LoginUser {
     #[validate(custom(function = "validate_username"))]
     #[schema(min_length = 6, max_length = 16, pattern = "^[a-zA-Z]{6,16}$")]
     pub username: String,
-
-    #[schema(format = "email", pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]
-    #[validate(email)]
-    pub email: String,
 
     #[validate(custom(function = "validate_password"))]
     #[schema(
@@ -30,16 +26,6 @@ pub struct RegisterUser {
         pattern = "^[A-Za-z\\d@$!%*?&]{8,32}$"
     )]
     pub password: String,
-}
-
-impl From<RegisterUser> for NewUser {
-    fn from(reg: RegisterUser) -> Self {
-        NewUser {
-            username: reg.username,
-            email: reg.email,
-            password: reg.password,
-        }
-    }
 }
 
 pub fn validate_username_logic(username: &str) -> Result<(), String> {
@@ -68,7 +54,7 @@ pub fn validate_password_logic(password: &str) -> Result<(), String> {
     if !password.chars().any(|c| "@$!%*?&".contains(c)) {
         return Err("Password must contain at least one special character (@$!%*?&)".into());
     }
-    Ok(())  
+    Ok(())
 }
 
 pub fn validate_username(username: &str) -> Result<(), ValidationError> {

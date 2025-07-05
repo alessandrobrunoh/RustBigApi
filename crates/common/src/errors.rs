@@ -26,6 +26,12 @@ pub enum ServiceError {
     Conflict(String),
 }
 
+impl ServiceError {
+    pub fn Unauthorized(message: String) -> Self {
+        ServiceError::ValidationError(message)
+    }
+}
+
 // Definiamo una struttura per la risposta JSON dell'errore
 #[derive(Serialize, ToSchema)]
 pub struct ErrorResponse {

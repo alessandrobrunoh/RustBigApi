@@ -1,4 +1,5 @@
-pub use crate::models::user::RegisterUser;
+pub use crate::models::register::RegisterUser;
+pub use crate::models::login::LoginUser;
 pub mod handlers;
 pub mod models;
 mod config;

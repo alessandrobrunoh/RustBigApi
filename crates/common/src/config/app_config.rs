@@ -18,4 +18,8 @@ impl AppConfig {
             .build()?
             .try_deserialize()
     }
+
+    pub fn is_production(&self) -> bool {
+        self.rust_log.as_deref() == Some("info")
+    }
 }
